@@ -52,12 +52,13 @@ function addToCart(id) {
 
 function increaseQty(id) {
   const item = cart.find((i) => i.id === id);
-  item.qty;
+  item.qty++;
   renderCart();
 }
 
 function decreaseQty(id) {
   const item = cart.find((i) => i.id === id);
+  if (item.qty === 1) return;
   item.qty--;
   renderCart();
 }
@@ -83,7 +84,7 @@ function renderCart() {
   cartItemsEl.innerHTML = "";
   let total = "";
   cart.forEach((item) => {
-    const lineTotal = item.price;
+    const lineTotal = item.price * item.qty;
     const li = document.createElement("li");
     li.className = "cart-item";
     li.innerHTML = `<span>${item.name}</span>
